@@ -58,6 +58,7 @@
 - (void)dealloc
 {
     KTVHCLogDealloc(self);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopInternal];
 }
 
