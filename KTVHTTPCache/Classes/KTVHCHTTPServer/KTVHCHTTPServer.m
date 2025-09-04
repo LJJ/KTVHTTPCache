@@ -10,11 +10,16 @@
 #import "KTVHCHTTPConnection.h"
 #import "KTVHCHTTPHeader.h"
 #import "KTVHCURLTool.h"
+#import "KTVHCCommon.h"
 #import "KTVHCLog.h"
 
 #import <net/if.h>
 #import <ifaddrs.h>
 #import <arpa/inet.h>
+
+#if KTVHC_UIKIT
+#import <UIKit/UIKit.h>
+#endif
 
 @interface KTVHCHTTPServer ()
 
@@ -47,10 +52,12 @@
         [self.server setType:@"_http._tcp."];
         self.pingCondition = [[NSCondition alloc] init];
         self.pingQueue = dispatch_queue_create("KTVHCHTTPServer_pingQueue", DISPATCH_QUEUE_SERIAL);
+#if KTVHC_UIKIT
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillEnterForeground)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
+#endif
     }
     return self;
 }
