@@ -66,19 +66,19 @@ Run `carthage update` to build the framework and drag the built `KTVHTTPCache.fr
 
 You can add KTVHTTPCache via Swift Package Manager (Xcode 11+):
 
-- In Xcode: File > Add Packages..., then enter the repository URL of this project and add the "KTVHTTPCacheSwift" product to your target (Swift 封装，不直接暴露 Objective-C 接口)。
+- In Xcode: File > Add Packages..., then enter the repository URL of this project and add the "KTVHTTPCacheSwift" product to your target（仅导出 Swift 产品，不暴露 Objective‑C 接口）。
 
 Or in your own `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.2.0")
+    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.2.1")
 ]
 ```
 
-#### Swift-only API
+#### Swift-only API（仅 Swift 接口）
 
-Using the Swift wrapper (no Objective-C API exposure):
+在 Swift 项目中仅使用 Swift 封装（不需要接触任何 Objective‑C 头文件）：
 
 ```swift
 import KTVHTTPCacheSwift
@@ -97,6 +97,22 @@ HTTPCache.timeoutInterval = 30
 HTTPCache.whitelistHeaderKeys = ["User-Agent", "Range"]
 HTTPCache.additionalHeaders = ["User-Agent": "Demo/1.0"]
 ```
+
+常用 API 速览：
+- 启动/停止代理服务：`try HTTPCache.start()` / `HTTPCache.stop()`
+- 指定端口：`HTTPCache.setPort(8080)`（默认 0 自动分配）
+- 生成代理 URL：`HTTPCache.proxyURL(for: originalURL, bindToLocalhost: true)`
+- 还原原始 URL：`HTTPCache.originalURL(from: proxyURL)`
+- 获取已完整缓存的文件 URL：`HTTPCache.completeFileURL(for:)`
+- 缓存大小：`HTTPCache.maxCacheLength` / `HTTPCache.totalCacheLength`
+- 删除缓存：`HTTPCache.deleteCache(for:)` / `HTTPCache.deleteAllCaches()`
+- URL 归一化映射：`HTTPCache.setURLConverter { url in url }`
+- HLS 内容处理：`HTTPCache.setHLSContentHandler { content in content }`
+- 网络配置：`HTTPCache.timeoutInterval`、`HTTPCache.whitelistHeaderKeys`、`HTTPCache.additionalHeaders`
+
+说明：
+- 本包通过 Swift 产品 `KTVHTTPCacheSwift` 对外暴露 API；底层 ObjC 仅作为内部依赖，外部无需引入或配置任何桥接头文件。
+- 如遇到 Xcode 包缓存问题，可执行：File > Packages > Reset Package Caches，再 Resolve Packages。
 
 
 ## Design Principles

@@ -9,7 +9,7 @@ let package = Package(
         .macOS(.v10_15),
     ],
     products: [
-        .library(name: "KTVHTTPCache", targets: ["KTVHTTPCache"]),
+        // 仅导出 Swift 封装产品，ObjC 目标仅作为内部依赖
         .library(name: "KTVHTTPCacheSwift", targets: ["KTVHTTPCacheSwift"]),
     ],
     dependencies: [
