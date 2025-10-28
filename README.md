@@ -62,6 +62,20 @@ github "ChangbaDevs/KTVHTTPCache" ~> 3.0.0
 
 Run `carthage update` to build the framework and drag the built `KTVHTTPCache.framework` and `KTVCocoaHTTPServer.framework` into your Xcode project.
 
+#### Installation with Swift Package Manager
+
+You can add KTVHTTPCache via Swift Package Manager (Xcode 11+):
+
+- In Xcode: File > Add Packages..., then enter the repository URL of this project and add the "KTVHTTPCache" product to your target.
+
+Or in your own `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.1.0")
+]
+```
+
 
 ## Design Principles
 
@@ -220,4 +234,3 @@ KTVHTTPCache is released under the MIT license.
 
 - [SGPlayer](https://github.com/libobjc/SGPlayer) - A powerful media player framework for iOS, macOS, and tvOS.
 - [KTVVideoProcess](https://github.com/ChangbaDevs/KTVVideoProcess) - A High-Performance video effects processing framework.
-
