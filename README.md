@@ -66,14 +66,36 @@ Run `carthage update` to build the framework and drag the built `KTVHTTPCache.fr
 
 You can add KTVHTTPCache via Swift Package Manager (Xcode 11+):
 
-- In Xcode: File > Add Packages..., then enter the repository URL of this project and add the "KTVHTTPCache" product to your target.
+- In Xcode: File > Add Packages..., then enter the repository URL of this project and add the "KTVHTTPCacheSwift" product to your target (Swift 封装，不直接暴露 Objective-C 接口)。
 
 Or in your own `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.1.2")
+    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.2.0")
 ]
+```
+
+#### Swift-only API
+
+Using the Swift wrapper (no Objective-C API exposure):
+
+```swift
+import KTVHTTPCacheSwift
+
+// 1. Start local proxy server
+try HTTPCache.start()
+
+// 2. Generate proxy URL
+let proxy = HTTPCache.proxyURL(for: originalURL)
+
+// 3. Use with AVPlayer
+let player = AVPlayer(url: proxy)
+
+// Optional: network config
+HTTPCache.timeoutInterval = 30
+HTTPCache.whitelistHeaderKeys = ["User-Agent", "Range"]
+HTTPCache.additionalHeaders = ["User-Agent": "Demo/1.0"]
 ```
 
 
