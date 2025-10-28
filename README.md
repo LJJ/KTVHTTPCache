@@ -72,7 +72,7 @@ Or in your own `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.1.0")
+    .package(url: "https://github.com/your-org-or-user/KTVHTTPCache.git", from: "3.1.1")
 ]
 ```
 
