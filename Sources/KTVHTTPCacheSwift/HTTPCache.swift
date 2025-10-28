@@ -1,5 +1,5 @@
 import Foundation
-import KTVHTTPCache
+@_implementationOnly import KTVHTTPCache
 
 public enum HTTPCache {
     // MARK: - Server
