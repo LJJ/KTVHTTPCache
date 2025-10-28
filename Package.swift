@@ -10,6 +10,7 @@ let package = Package(
     ],
     products: [
         .library(name: "KTVHTTPCache", targets: ["KTVHTTPCache"]),
+        .library(name: "KTVHTTPCacheSwift", targets: ["KTVHTTPCacheSwift"]),
     ],
     dependencies: [
         .package(url: "https://github.com/robbiehanson/CocoaAsyncSocket.git", from: "7.6.5"),
@@ -39,6 +40,11 @@ let package = Package(
                 .linkedFramework("UIKit", .when(platforms: [.iOS, .tvOS])),
                 .linkedFramework("AppKit", .when(platforms: [.macOS])),
             ]
+        ),
+        .target(
+            name: "KTVHTTPCacheSwift",
+            dependencies: ["KTVHTTPCache"],
+            path: "Sources/KTVHTTPCacheSwift"
         ),
     ]
 )
